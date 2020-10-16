@@ -87,97 +87,97 @@ function startGame(){
     setButtons(firstAnswer,0, secondQuestion)
     game.style.display = "flex";
     container.style.backgroundImage = 0.5;
-    img.style.backgroundImage = "url(chile-flag.png)"; 
-    container.style.backgroundImage = "url(santiago.jpg)";
+    img.style.backgroundImage = "url(Images/chile-flag.png)"; 
+    container.style.backgroundImage = "url(Images/santiago.jpg)";
 }
     function secondQuestion(e){
         console.log(e);
       checkAnswer(e.target.innerText, 0)
-    img.style.backgroundImage = "url(argentina.jpeg)";  
+    img.style.backgroundImage = "url(Images/argentina.jpeg)";  
     setButtons(secondAnswer,1, thirdQuestion, secondQuestion)   
-    container.style.backgroundImage = "url(buenos-aires-download-free.original.jpg)";
+    container.style.backgroundImage = "url(Images/buenos-aires-download-free.original.jpg)";
     
         
 }    
     function thirdQuestion(e){
         checkAnswer(e.target.innerText, 1)
-    img.style.backgroundImage = "url(el-salvador-flag-medium.jpg)";  
+    img.style.backgroundImage = "url(Images/el-salvador-flag-medium.jpg)";  
      setButtons(thirdAnswer,2, fourthQuestion, thirdQuestion)
-     container.style.backgroundImage = "url(san-salvadores.png)";
+     container.style.backgroundImage = "url(Images/san-salvadores.png)";
     
 }
     function fourthQuestion(e){
         checkAnswer(e.target.innerText, 2)
-    img.style.backgroundImage = "url(mexico-flag-small.jpg)";  
+    img.style.backgroundImage = "url(Images/mexico-flag-small.jpg)";  
      setButtons(fourthAnswer,3, fifthQuestion, fourthQuestion)
-     container.style.backgroundImage = "url(mexico.jpg)";
+     container.style.backgroundImage = "url(Images/mexico.jpg)";
         
 }
     function fifthQuestion(e){
         checkAnswer(e.target.innerText, 3)
-    img.style.backgroundImage = "url(belize-flag-small.jpg)";  
+    img.style.backgroundImage = "url(Images/belize-flag-small.jpg)";  
      setButtons(fifthAnswer,4, sixthQuestion, fifthQuestion)
-     container.style.backgroundImage = "url(belmopan.jpg)";
+     container.style.backgroundImage = "url(Images/belmopan.jpg)";
         
 } 
     function sixthQuestion(e){
         checkAnswer(e.target.innerText, 4)
-    img.style.backgroundImage = "url(egypt-flag-small.jpg)";  
+    img.style.backgroundImage = "url(Images/egypt-flag-small.jpg)";  
      setButtons(sixthAnswer,5, seventhQuestion, sixthQuestion)
-     container.style.backgroundImage = "url(cairo.jpg)";
+     container.style.backgroundImage = "url(Images/cairo.jpg)";
         
 }
     function seventhQuestion(e){
     checkAnswer(e.target.innerText, 5)
-    img.style.backgroundImage = "url(madagascar-flag-small.jpg)";  
+    img.style.backgroundImage = "url(Images/madagascar-flag-small.jpg)";  
     setButtons(seventhAnswer,6, eigthQuestion, seventhQuestion)
-    container.style.backgroundImage = "url(Antananarivo-Madagascar.jpg)";
+    container.style.backgroundImage = "url(Images/Antananarivo-Madagascar.jpg)";
         
 }
 
     function eigthQuestion(e){
     checkAnswer(e.target.innerText, 6)
-    img.style.backgroundImage = "url(france-flag-small.jpg)";  
+    img.style.backgroundImage = "url(Images/france-flag-small.jpg)";  
     setButtons(eigthAnswer,7, ninthQuestion, eigthQuestion)
-    container.style.backgroundImage = "url(paris.jpg)";
+    container.style.backgroundImage = "url(Images/paris.jpg)";
     
 }  
 
 function ninthQuestion(e){
     checkAnswer(e.target.innerText, 7)
-img.style.backgroundImage = "url(italy.jpg)";  
+img.style.backgroundImage = "url(Images/italy.jpg)";  
 setButtons(ninthAnswer,8, tenthQuestion, ninthQuestion)
-container.style.backgroundImage = "url(rome.jpg)";
+container.style.backgroundImage = "url(Images/rome.jpg)";
    
 }
 
 function tenthQuestion(e){
    checkAnswer(e.target.innerText, 8)
-img.style.backgroundImage = "url(china.jpg)";  
+img.style.backgroundImage = "url(Images/china.jpg)";  
 setButtons(tenthAnswer,9, eleventhQuestion, tenthQuestion)
-container.style.backgroundImage = "url(beijing.jpg)";
+container.style.backgroundImage = "url(Images/beijing.jpg)";
    
 }
 
 function eleventhQuestion(e){
 checkAnswer(e.target.innerText, 9)
-img.style.backgroundImage = "url(iraq.jpg)";  
+img.style.backgroundImage = "url(Images/iraq.jpg)";  
 setButtons(eleventhAnswer,10, doceQuestion, eleventhQuestion)
-container.style.backgroundImage = "url(baghdad.jpg)"; 
+container.style.backgroundImage = "url(Images/baghdad.jpg)"; 
 }
 
 function doceQuestion(e){
    checkAnswer(e.target.innerText, 10)
-img.style.backgroundImage = "url(australia.jpg)";  
+img.style.backgroundImage = "url(Images/australia.jpg)";  
 setButtons(doceAnswer,11, treceQuestion, doceQuestion)
-container.style.backgroundImage = "url(canberra.jpg)";   
+container.style.backgroundImage = "url(Images/canberra.jpg)";   
 }
 
 function treceQuestion(e){
    checkAnswer(e.target.innerText, 11)
-img.style.backgroundImage = "url(new-zealand.jpg)";  
+img.style.backgroundImage = "url(Images/new-zealand.jpg)";  
 setButtons(treceAnswer,12, endGame, treceQuestion)
-container.style.backgroundImage = "url(wellington.jpg)";  
+container.style.backgroundImage = "url(Images/wellington.jpg)";  
 }
 
 function endGame(e){
@@ -214,7 +214,7 @@ function endGame(e){
         console.log("Great Job")
         result.innerText = `Your Score is ${counter} out of 13\n Great Job`
     }
-       container.style.backgroundImage = "url(worldmapflags.jpg)";
+       container.style.backgroundImage = "url(Images/worldmapflags.jpg)";
 
        result.style.display = "flex";
        resetButton.style.display = "flex"

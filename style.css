@@ -19,7 +19,7 @@ body {
     height: 100vh;
     border: 1px solid red;
     width: 100%;
-    background-image: url(worldmapflags.jpg);
+    background-image: url(Images/worldmapflags.jpg);
     background-size: cover;
     
       
@@ -82,7 +82,7 @@ button {
     display: flex;
     height: 200px;
     width: 350px;
-    background-image: url(flags.png);
+    background-image: url(Images/flags.png);
     background-size: cover;
     
 
