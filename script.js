@@ -3,6 +3,7 @@ let button = document.querySelector("button")
 let intro = document.querySelector(".intro")
 let reset = document.querySelector(".reset")
 let game = document.querySelector(".game")
+let score = document.querySelector("p")
 let country = document.querySelector(".country")
 let answers = document.querySelectorAll(".answers")
 let firstRow = document.querySelector(".first-row")
@@ -52,16 +53,19 @@ function setButtons(questionAnswers, countryIndex, nextQuestion, previousQuestio
         answer.addEventListener('click', nextQuestion)
         
         })
+        
 }
 function checkAnswer(submittedAnswer, answerIndex){
     if(correctAnswers[answerIndex] === submittedAnswer){
         
         counter++
         console.log("Correct answer", counter)
+        
     }
     else{
         console.log("incorrect")
     } 
+    score.innerText = `SCORE ${counter}`
 }
 function setQuestion(e, questionAnswers, answerIndex, nextQuestion, previousQuestion=undefined, imgurl=undefined){
     checkAnswer(e.target.innerText, answerIndex)
@@ -79,18 +83,20 @@ function setQuestion(e, questionAnswers, answerIndex, nextQuestion, previousQues
 
 function startGame(){    
     console.log("it works");
-    intro.style.opacity = 0;
+    intro.style.display = "none";
     setButtons(firstAnswer,0, secondQuestion)
-    game.style.opacity = 100;
+    game.style.display = "flex";
     container.style.backgroundImage = 0.5;
     img.style.backgroundImage = "url(chile-flag.png)"; 
     container.style.backgroundImage = "url(santiago.jpg)";
 }
     function secondQuestion(e){
+        console.log(e);
       checkAnswer(e.target.innerText, 0)
     img.style.backgroundImage = "url(argentina.jpeg)";  
     setButtons(secondAnswer,1, thirdQuestion, secondQuestion)   
     container.style.backgroundImage = "url(buenos-aires-download-free.original.jpg)";
+    
         
 }    
     function thirdQuestion(e){
