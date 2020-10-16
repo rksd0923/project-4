@@ -1,6 +1,7 @@
+
 let button = document.querySelector("button")
 let intro = document.querySelector(".intro")
-//let out = document.querySelector(".out")
+let reset = document.querySelector(".reset")
 let game = document.querySelector(".game")
 let country = document.querySelector(".country")
 let answers = document.querySelectorAll(".answers")
@@ -10,9 +11,12 @@ let answer2 = document.querySelector(".answer2")
 let answer3 = document.querySelector(".answer3")
 let answer4 = document.querySelector(".answer4")
 let result = document.querySelector(".result")
+let img = document.querySelector(".img")
+let container = document.querySelector(".body-container")
+let resetButton = document.querySelector(".resetButton")
 
-let countries = ['Brazil', 'Argentina', 'El Salvador', 'Mexico', 'Belize', 'Egypt', 'Madagascar', 'France', 'Italy', 'China', 'Iraq', 'Australia', 'New Zealand']
-let firstAnswer = ['La Paz', 'Brazilia', 'Caracas', 'San Juan']
+let countries = ['Chile', 'Argentina', 'El Salvador', 'Mexico', 'Belize', 'Egypt', 'Madagascar', 'France', 'Italy', 'China', 'Iraq', 'Australia', 'New Zealand']
+let firstAnswer = ['La Paz', 'Santiago', 'Caracas', 'San Juan']
 let secondAnswer = ['Madrid', 'Quito', 'Asuncion', 'Buenos Aires']
 let thirdAnswer = ['Managua', 'Lima', 'San Salvador', 'San Jose']
 let fourthAnswer = ['Guadalajara', 'San Antonio', 'Mexico City', 'La Union']
@@ -25,450 +29,221 @@ let tenthAnswer = ['Beijing', 'Tianjin', 'Xian', 'Wahun']
 let eleventhAnswer = ['Fallujah', 'Baghdad', 'Kirkuk', 'Karbala']
 let doceAnswer = ['Sidney', 'Canberra', 'Melbourne', 'Darwin']
 let treceAnswer = ['Auckland', 'Nelson', 'Wellington', 'Napier']
-let correctAnswers = ['Brazilia', 'Buenos Aires', 'San Salvador', 'Mexico City', 'Belmopan', 'Cairo', 'Antanarivo', 'Paris', 'Rome', 'Beijing', 'Baghdad', 'Canberra', 'Wellington']
+let correctAnswers = ['Santiago', 'Buenos Aires', 'San Salvador', 'Mexico City', 'Belmopan', 'Cairo', 'Antananarivo', 'Paris', 'Rome', 'Beijing', 'Baghdad', 'Canberra', 'Wellington']
 let counter = 0;
 
-  
-
-
 button.addEventListener("click", startGame)
-//answers.addEventListener("click", secondQuestion)
-//answers.addEventListener("click", thirdQuestion)
-
-
-
-function startGame(){
-  
-    
-    console.log("it works");
-    intro.style.opacity = 0;
-    game.style.opacity = 100;
-    country.innerText = countries[0];
-    answer1.innerText = firstAnswer[0];
-    answer2.innerText = firstAnswer[1];
-    answer3.innerText = firstAnswer[2];
-    answer4.innerText = firstAnswer[3];
-    answers.forEach(answer=>{
-        
-    answer.addEventListener('click', secondQuestion)
-    
-    })
-
+button.addEventListener("mouseover", color)
+function color(){
+    button.style.backgroundColor = "#C20E18"
+}
+button.addEventListener("mouseout", colorBack)
+function colorBack(){
+    button.style.backgroundColor = "rgba(0,0,0, 0.4)"
 }
 
-    function secondQuestion(e){
-      console.log(e.target.innerText)  
-      if(correctAnswers[0] === e.target.innerText){
+function setButtons(questionAnswers, countryIndex, nextQuestion, previousQuestion=undefined){
+    country.innerText = countries[countryIndex]
+    answers.forEach((answer, i)=>{
+        answer.innerText = questionAnswers[i]
+        if(previousQuestion!==undefined){
+            answer.removeEventListener("click", previousQuestion)
+        }
+        answer.addEventListener('click', nextQuestion)
+        
+        })
+}
+function checkAnswer(submittedAnswer, answerIndex){
+    if(correctAnswers[answerIndex] === submittedAnswer){
         
         counter++
         console.log("Correct answer", counter)
     }
     else{
         console.log("incorrect")
-    }   
-        
-        country.innerText = countries[1];
-        answer1.innerText = secondAnswer[0];
-        answer2.innerText = secondAnswer[1];
-        answer3.innerText = secondAnswer[2];
-        answer4.innerText = secondAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', secondQuestion)
-            answer.addEventListener('click', thirdQuestion)
-            
-            })
-        //answer.addEventListener('click', thirdQuestion)
-            
-                
-
-        
-        
-        //answers.addEventListener("click", thirdQuestion)
-                
-               
-        
-
-        
-        
+    } 
+}
+function setQuestion(e, questionAnswers, answerIndex, nextQuestion, previousQuestion=undefined, imgurl=undefined){
+    checkAnswer(e.target.innerText, answerIndex)
+    
+    if(imgurl!==undefined){
+        img.style.backgroundImage = `url(${imgurl})`;  
     }
+    if(previousQuestion!==undefined){
+        setButtons(questionAnswers,1, nextQuestion, previousQuestion)  
+    }else{
+        setButtons(questionAnswers,1, nextQuestion)
+    }
+        
+}
 
-    
-    
+function startGame(){    
+    console.log("it works");
+    intro.style.opacity = 0;
+    setButtons(firstAnswer,0, secondQuestion)
+    game.style.opacity = 100;
+    container.style.backgroundImage = 0.5;
+    img.style.backgroundImage = "url(chile-flag.png)"; 
+    container.style.backgroundImage = "url(santiago.jpg)";
+}
+    function secondQuestion(e){
+      checkAnswer(e.target.innerText, 0)
+    img.style.backgroundImage = "url(argentina.jpeg)";  
+    setButtons(secondAnswer,1, thirdQuestion, secondQuestion)   
+    container.style.backgroundImage = "url(buenos-aires-download-free.original.jpg)";
+        
+}    
     function thirdQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[1] === e.target.innerText){
-        
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[2];
-        answer1.innerText = thirdAnswer[0];
-        answer2.innerText = thirdAnswer[1];
-        answer3.innerText = thirdAnswer[2];
-        answer4.innerText = thirdAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', thirdQuestion)
-            answer.addEventListener('click', fourthQuestion)
-            
-            })
-        //answers.addEventListener("click", fourthQuestion)
-        
-        
-        console.log(e.target.innerText)  
-      
-        
-    }
-
+        checkAnswer(e.target.innerText, 1)
+    img.style.backgroundImage = "url(el-salvador-flag-medium.jpg)";  
+     setButtons(thirdAnswer,2, fourthQuestion, thirdQuestion)
+     container.style.backgroundImage = "url(san-salvadores.png)";
+    
+}
     function fourthQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[2] === e.target.innerText){
+        checkAnswer(e.target.innerText, 2)
+    img.style.backgroundImage = "url(mexico-flag-small.jpg)";  
+     setButtons(fourthAnswer,3, fifthQuestion, fourthQuestion)
+     container.style.backgroundImage = "url(mexico.jpg)";
         
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[3];
-        answer1.innerText = fourthAnswer[0];
-        answer2.innerText = fourthAnswer[1];
-        answer3.innerText = fourthAnswer[2];
-        answer4.innerText = fourthAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', fourthQuestion)
-            answer.addEventListener('click', fifthQuestion)
-            
-            })
-        //answers.addEventListener("click", fourthQuestion)
-        
-        
-        
-    }
-
+}
     function fifthQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[3] === e.target.innerText){
+        checkAnswer(e.target.innerText, 3)
+    img.style.backgroundImage = "url(belize-flag-small.jpg)";  
+     setButtons(fifthAnswer,4, sixthQuestion, fifthQuestion)
+     container.style.backgroundImage = "url(belmopan.jpg)";
         
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[4];
-        answer1.innerText = fifthAnswer[0];
-        answer2.innerText = fifthAnswer[1];
-        answer3.innerText = fifthAnswer[2];
-        answer4.innerText = fifthAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', fifthQuestion)
-            answer.addEventListener('click', sixthQuestion)
-            
-            })
-       // answers.addEventListener("click", sixthQuestion)
-        
-        
-       
-    }
-
+} 
     function sixthQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[4] === e.target.innerText){
+        checkAnswer(e.target.innerText, 4)
+    img.style.backgroundImage = "url(egypt-flag-small.jpg)";  
+     setButtons(sixthAnswer,5, seventhQuestion, sixthQuestion)
+     container.style.backgroundImage = "url(cairo.jpg)";
         
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[5];
-        answer1.innerText = sixthAnswer[0];
-        answer2.innerText = sixthAnswer[1];
-        answer3.innerText = sixthAnswer[2];
-        answer4.innerText = sixthAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', sixthQuestion)
-            answer.addEventListener('click', seventhQuestion)
-            
-            })
-        //answers.addEventListener("click", seventhQuestion)
-        
-        
-        
-    }
-
+}
     function seventhQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[5] === e.target.innerText){
+    checkAnswer(e.target.innerText, 5)
+    img.style.backgroundImage = "url(madagascar-flag-small.jpg)";  
+    setButtons(seventhAnswer,6, eigthQuestion, seventhQuestion)
+    container.style.backgroundImage = "url(Antananarivo-Madagascar.jpg)";
         
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[6];
-        answer1.innerText = seventhAnswer[0];
-        answer2.innerText = seventhAnswer[1];
-        answer3.innerText = seventhAnswer[2];
-        answer4.innerText = seventhAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', seventhQuestion)
-            answer.addEventListener('click', eigthQuestion)
-            
-            })
-        //answers.addEventListener("click", eigthQuestion)
-        
-        
-        
-    }
+}
 
     function eigthQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[6] === e.target.innerText){
-        
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[7];
-        answer1.innerText = eigthAnswer[0];
-        answer2.innerText = eigthAnswer[1];
-        answer3.innerText = eigthAnswer[2];
-        answer4.innerText = eigthAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', eigthQuestion)
-            answer.addEventListener('click', ninthQuestion)
-            
-            })
-        //answers.addEventListener("click", ninthQuestion)
-        
-    }
-
-    function ninthQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[7] === e.target.innerText){
-        
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[8];
-        answer1.innerText = ninthAnswer[0];
-        answer2.innerText = ninthAnswer[1];
-        answer3.innerText = ninthAnswer[2];
-        answer4.innerText = ninthAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', ninthQuestion)
-            answer.addEventListener('click', tenthQuestion)
-            
-            })
-        //answers.addEventListener("click", ninthQuestion)
-        
-    }
-
-    function tenthQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[8] === e.target.innerText){
-        
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[9];
-        answer1.innerText = tenthAnswer[0];
-        answer2.innerText = tenthAnswer[1];
-        answer3.innerText = tenthAnswer[2];
-        answer4.innerText = tenthAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', tenthQuestion)
-            answer.addEventListener('click', eleventhQuestion)
-            
-            })
-        //answers.addEventListener("click", tenthQuestion)
-        
-    }
-
+    checkAnswer(e.target.innerText, 6)
+    img.style.backgroundImage = "url(france-flag-small.jpg)";  
+    setButtons(eigthAnswer,7, ninthQuestion, eigthQuestion)
+    container.style.backgroundImage = "url(paris.jpg)";
     
-    
-    function eleventhQuestion(e){
+}  
 
-        
-        console.log(e.target.innerText)
-        if(correctAnswers[9] === e.target.innerText){
-        
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[10];
-        answer1.innerText = eleventhAnswer[0];
-        answer2.innerText = eleventhAnswer[1];
-        answer3.innerText = eleventhAnswer[2];
-        answer4.innerText = eleventhAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', eleventhQuestion)
-            answer.addEventListener('click', doceQuestion)
-            
-            })
-       // answers.addEventListener("click", doceQuestion)
+function ninthQuestion(e){
+    checkAnswer(e.target.innerText, 7)
+img.style.backgroundImage = "url(italy.jpg)";  
+setButtons(ninthAnswer,8, tenthQuestion, ninthQuestion)
+container.style.backgroundImage = "url(rome.jpg)";
+   
+}
+
+function tenthQuestion(e){
+   checkAnswer(e.target.innerText, 8)
+img.style.backgroundImage = "url(china.jpg)";  
+setButtons(tenthAnswer,9, eleventhQuestion, tenthQuestion)
+container.style.backgroundImage = "url(beijing.jpg)";
+   
+}
+
+function eleventhQuestion(e){
+checkAnswer(e.target.innerText, 9)
+img.style.backgroundImage = "url(iraq.jpg)";  
+setButtons(eleventhAnswer,10, doceQuestion, eleventhQuestion)
+container.style.backgroundImage = "url(baghdad.jpg)"; 
+}
+
+function doceQuestion(e){
+   checkAnswer(e.target.innerText, 10)
+img.style.backgroundImage = "url(australia.jpg)";  
+setButtons(doceAnswer,11, treceQuestion, doceQuestion)
+container.style.backgroundImage = "url(canberra.jpg)";   
+}
+
+function treceQuestion(e){
+   checkAnswer(e.target.innerText, 11)
+img.style.backgroundImage = "url(new-zealand.jpg)";  
+setButtons(treceAnswer,12, endGame, treceQuestion)
+container.style.backgroundImage = "url(wellington.jpg)";  
+}
+
+function endGame(e){
+   game.style.opacity = 0;
+      
+   console.log(e.target.innerText)
+   if(correctAnswers[12] === e.target.innerText){
+   
+       counter++
+       console.log("Correct answer", counter)
+   }
+   else{
+       console.log("incorrect")
+   } 
+
+       console.log(counter)
+       if(counter <= 5){
+           console.log("you suck")
+           result.innerText = `Your Score is ${counter} out of 13\n You need to study more`
+           
+       }
+
+       if(counter >= 6 && counter < 9){
+           console.log("Good Job")
+           result.innerText = `Your Score is ${counter} out of 13\n Getting better`
+       }
+
+       if(counter >= 9 && counter < 11){
+           console.log("Great Job")
+           result.innerText = `Your Score is ${counter} out of 13\n Good Job`
+       }
+
+       if(counter >= 11 && counter <= 13){
+        console.log("Great Job")
+        result.innerText = `Your Score is ${counter} out of 13\n Great Job`
+    }
+       container.style.backgroundImage = "url(worldmapflags.jpg)";
+
+       result.style.display = "flex";
+       resetButton.style.display = "flex"
+   
+   }
+
+   reset.addEventListener("mouseover", changeColor)
+   reset.addEventListener("mouseout", changeBack)
+   reset.addEventListener("click", reload)
+    
+   function changeColor(){
+       reset.style.backgroundColor = "red";
+   }
+
+   function changeBack(){
+    reset.style.backgroundColor = "rgba(0,0,0, 0.4)";
+}
+function reload(){
+    window.location.reload(true)
+}
+
+
        
-    }
 
-    function doceQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[10] === e.target.innerText){
+    
         
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[11];
-        answer1.innerText = doceAnswer[0];
-        answer2.innerText = doceAnswer[1];
-        answer3.innerText = doceAnswer[2];
-        answer4.innerText = doceAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', doceQuestion)
-            answer.addEventListener('click', treceQuestion)
-            
-            })
-        //answers.addEventListener("click", treceQuestion)
-        
-    }
-
-    function treceQuestion(e){
-        console.log(e.target.innerText)
-        if(correctAnswers[11] === e.target.innerText){
-        
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        }   
-        country.innerText = countries[12];
-        answer1.innerText = treceAnswer[0];
-        answer2.innerText = treceAnswer[1];
-        answer3.innerText = treceAnswer[2];
-        answer4.innerText = treceAnswer[3];
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', treceQuestion)
-            answer.addEventListener('click', endGame)
-            
-            })
-        //answers.addEventListener("click", gameResult)
-        
-    }
-
-    function endGame(e){
-        game.style.opacity = 0;
-        //intro.style.opacity = 100;
-        
-
-        
-        console.log(e.target.innerText)
-        if(correctAnswers[12] === e.target.innerText){
-        
-            counter++
-            console.log("Correct answer", counter)
-        }
-        else{
-            console.log("incorrect")
-        } 
-
-        answers.forEach(answer=>{
-            answer.removeEventListener('click', endGame)
-            answer.addEventListener('click', result)
-            
-            })
-
-            
-            console.log(counter)
-            if(counter == 1){
-                console.log("you suck")
-                intro.innerText = "YOU SUCK, 1/13"
-                
-            }
-
-            if(counter == 2){
-                console.log("you suck")
-                intro.innerText = "YOU SUCK"
-            }
-
-            if(counter == 3){
-                console.log("you suck")
-                intro.innerText = "YOU SUCK"
-            }
-
-            if(counter == 4){
-                console.log("you suck")
-                intro.innerText = "YOU SUCK"
-            }
-            
-            if(counter == 5){
-                console.log("you suck")
-                intro.innerText = "YOU SUCK"
-            }
-
-            if(counter == 6){
-                console.log("you suck")
-                intro.innerText = "READ MORE"
-            }
-
-            if(counter == 7){
-                console.log("Read more")
-                intro.innerText = "READ MORE"
-            }
-
-            if(counter == 8){
-                console.log("you suck")
-                intro.innerText = "READ MORE"
-            }
-
-            if(counter == 9){
-                console.log("you suck")
-                intro.innerText = "HOLY CRAP YOU'RE GOOD"
-            }
-
-            if(counter == 10){
-                console.log("you suck")
-                intro.innerText = "HOLY CRAP YOU'RE GOOD"
-            }
-
-            if(counter == 11){
-                console.log("you suck")
-                intro.innerText = "HOLY CRAP YOU'RE GOOD"
-            }
-
-            if(counter == 12){
-                console.log("you suck")
-                intro.innerText = "HOLY CRAP, YOU'RE GOOD"
-            }
-
-            if(counter == 13){
-                console.log("HOLY CRAP, YOU'RE GOOD")
-                intro.innerText = "YOU SUCK"
-            }
-            
-            result.style.display = "block";
         
         
 
-        }
+    
+
+    
+        
+
+        
         
        
         
