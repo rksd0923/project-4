@@ -1,4 +1,4 @@
-
+// Variables using the DOM  
 let button = document.querySelector("button")
 let intro = document.querySelector(".intro")
 let reset = document.querySelector(".reset")
@@ -16,6 +16,7 @@ let img = document.querySelector(".img")
 let container = document.querySelector(".body-container")
 let resetButton = document.querySelector(".resetButton")
 
+// Created country array, possible answersarray, correct asnwers array to pupulate HTML
 let countries = ['Chile', 'Argentina', 'El Salvador', 'Mexico', 'Belize', 'Egypt', 'Madagascar', 'France', 'Italy', 'China', 'Iraq', 'Australia', 'New Zealand']
 let firstAnswer = ['La Paz', 'Santiago', 'Caracas', 'San Juan']
 let secondAnswer = ['Madrid', 'Quito', 'Asuncion', 'Buenos Aires']
@@ -31,10 +32,10 @@ let eleventhAnswer = ['Fallujah', 'Baghdad', 'Kirkuk', 'Karbala']
 let doceAnswer = ['Sidney', 'Canberra', 'Melbourne', 'Darwin']
 let treceAnswer = ['Auckland', 'Nelson', 'Wellington', 'Napier']
 let correctAnswers = ['Santiago', 'Buenos Aires', 'San Salvador', 'Mexico City', 'Belmopan', 'Cairo', 'Antananarivo', 'Paris', 'Rome', 'Beijing', 'Baghdad', 'Canberra', 'Wellington']
-let counter = 0;
+let counter = 0; // To keep track of scoring
 
-button.addEventListener("click", startGame)
-button.addEventListener("mouseover", color)
+button.addEventListener("click", startGame)  // To start the game
+button.addEventListener("mouseover", color)  
 function color(){
     button.style.backgroundColor = "#C20E18"
 }
@@ -43,8 +44,8 @@ function colorBack(){
     button.style.backgroundColor = "rgba(0,0,0, 0.4)"
 }
 
-function setButtons(questionAnswers, countryIndex, nextQuestion, previousQuestion=undefined){
-    country.innerText = countries[countryIndex]
+function setButtons(questionAnswers, countryIndex, nextQuestion, previousQuestion=undefined){ // POpulates buttons with possible answers, populates country 
+    country.innerText = countries[countryIndex]                                               
     answers.forEach((answer, i)=>{
         answer.innerText = questionAnswers[i]
         if(previousQuestion!==undefined){
@@ -55,7 +56,7 @@ function setButtons(questionAnswers, countryIndex, nextQuestion, previousQuestio
         })
         
 }
-function checkAnswer(submittedAnswer, answerIndex){
+function checkAnswer(submittedAnswer, answerIndex){  // Checks if answer is correct
     if(correctAnswers[answerIndex] === submittedAnswer){
         
         counter++
@@ -67,7 +68,7 @@ function checkAnswer(submittedAnswer, answerIndex){
     } 
     score.innerText = `SCORE ${counter}`
 }
-function setQuestion(e, questionAnswers, answerIndex, nextQuestion, previousQuestion=undefined, imgurl=undefined){
+function setQuestion(e, questionAnswers, answerIndex, nextQuestion, previousQuestion=undefined, imgurl=undefined){  //Sets the question
     checkAnswer(e.target.innerText, answerIndex)
     
     if(imgurl!==undefined){
@@ -81,7 +82,7 @@ function setQuestion(e, questionAnswers, answerIndex, nextQuestion, previousQues
         
 }
 
-function startGame(){    
+function startGame(){    // Starts the game 
     console.log("it works");
     intro.style.display = "none";
     setButtons(firstAnswer,0, secondQuestion)
@@ -89,7 +90,8 @@ function startGame(){
     container.style.backgroundImage = 0.5;
     img.style.backgroundImage = "url(Images/chile-flag.png)"; 
     container.style.backgroundImage = "url(Images/santiago.jpg)";
-}
+}   
+// Next functions get the game going
     function secondQuestion(e){
         console.log(e);
       checkAnswer(e.target.innerText, 0)
@@ -180,7 +182,7 @@ setButtons(treceAnswer,12, endGame, treceQuestion)
 container.style.backgroundImage = "url(Images/wellington.jpg)";  
 }
 
-function endGame(e){
+function endGame(e){  // Last function in the game
    game.style.opacity = 0;
       
    console.log(e.target.innerText)
@@ -220,7 +222,7 @@ function endGame(e){
        resetButton.style.display = "flex"
    
    }
-
+// Event listeners for the reset button
    reset.addEventListener("mouseover", changeColor)
    reset.addEventListener("mouseout", changeBack)
    reset.addEventListener("click", reload)
@@ -232,7 +234,7 @@ function endGame(e){
    function changeBack(){
     reset.style.backgroundColor = "rgba(0,0,0, 0.4)";
 }
-function reload(){
+function reload(){  // It resets the game
     window.location.reload(true)
 }
 
